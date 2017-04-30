@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lumino - Dashboard</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!--Icons-->
+    <script src="js/lumino.glyphs.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+    </script>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <ul class="nav menu">
+        <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Main</a></li>
+        <li class="parent ">
+            <a href="#">
+                <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Menu
+            </a>
+            <ul class="children collapse" id="sub-item-1">
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Machine Learning
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Web Scrapping
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div><!--/.sidebar-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Select your choise</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <form role="form" method="post" action="javascript:post()">
+                            <div class="form-group">
+                                <label>Satellite</label>
+                                <select id="satellite" class="form-control">
+                                    <option selected value="MODIS_C6">MODIS</option>
+                                    <option value = "VNP14IMGTDL_NRT">VIIRS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Time</label>
+                                <select id="time" class="form-control">
+                                    <option selected value="24h">24h</option>
+                                    <option value = "48h">48h</option>
+                                    <option value = "7d">7d</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Region</label>
+                                <select id="region" class="form-control">
+                                    <option selected value = "Global">World</option>
+                                    <option value="Alska">Alaska</option>
+                                    <option value="Australia_and_New_Zealand">Australia and New Zealand</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Central_America">Central America</option>
+                                    <option value="Europe">Europe</option>
+                                    <option value="Northern_and_Central_Africa">North and Central Africa</option>
+                                    <option value="Russia_and_Asia">Russia and Asia</option>
+                                    <option value="South_America">South America</option>
+                                    <option value="South_Asia">South Asia</option>
+                                    <option value="SouthEast_Asia">South East Asia</option>
+                                    <option value="Southern_Africa">Southern Africa</option>
+                                    <option value="USA_contiguous_and_Hawaii">USA (Conterminous) and Hawaii</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+    </div><!-- /.row -->
+
+</div>	<!--/.main-->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery-1.3.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script>
+    !function ($) {
+        $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function () {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    })
+    $(window).on('resize', function () {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
+<script type="text/javascript">
+    function post()
+    {
+        var satellite = document.getElementById('satellite').value;
+        var region = document.getElementById('region').value;
+        var time = document.getElementById('time').value;
+        window.location = "PredictionWeather.php?response_satellite=" +  satellite + "&response_region=" + region+ "&response_time=" + time;
+    }
+</script>
+
+</head>
+</body>
+
+</html>
